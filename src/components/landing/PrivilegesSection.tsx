@@ -52,7 +52,7 @@ export default function PrivilegesSection({ isActive }: Props) {
                 className="text-xs h-7 px-3 border-white/20 text-white/70 hover:text-black hover:border-transparent transition-all"
                 onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = p.color; (e.currentTarget as HTMLButtonElement).style.color = '#000' }}
                 onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = ''; (e.currentTarget as HTMLButtonElement).style.color = '' }}
-                onClick={() => window.open(`https://t.me/leG6NdA?text=Хочу купить привилегию ${p.name} за ${p.price}₽`, '_blank')}
+                onClick={() => window.open('https://vk.ru/club239028200', '_blank')}
               >
                 Купить
               </Button>
