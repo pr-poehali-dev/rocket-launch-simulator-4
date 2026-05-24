@@ -2,7 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import Section from './Section'
 import Layout from './Layout'
+import PrivilegesSection from './PrivilegesSection'
 import { sections } from './sections'
+
+const TOTAL_SECTIONS = sections.length + 1
 
 export default function LandingPage() {
   const [activeSection, setActiveSection] = useState(0)
@@ -41,12 +44,15 @@ export default function LandingPage() {
     }
   }
 
+  // Вставляем секцию привилегий после 3-й секции (index 2)
+  const privilegesSectionIndex = 2
+
   return (
     <Layout>
       <nav className="fixed top-0 right-0 h-screen flex flex-col justify-center z-30 p-4">
-        {sections.map((section, index) => (
+        {Array.from({ length: TOTAL_SECTIONS }).map((_, index) => (
           <button
-            key={section.id}
+            key={index}
             className={`w-3 h-3 rounded-full my-2 transition-all ${
               index === activeSection ? 'bg-white scale-150' : 'bg-gray-600'
             }`}
@@ -62,13 +68,21 @@ export default function LandingPage() {
         ref={containerRef}
         className="h-full overflow-y-auto snap-y snap-mandatory"
       >
-        {sections.map((section, index) => (
-          <Section
-            key={section.id}
-            {...section}
-            isActive={index === activeSection}
-          />
-        ))}
+        {sections.map((section, index) => {
+          const scrollIndex = index >= privilegesSectionIndex ? index + 1 : index
+          return (
+            <>
+              {index === privilegesSectionIndex && (
+                <PrivilegesSection key="privileges" isActive={activeSection === privilegesSectionIndex} />
+              )}
+              <Section
+                key={section.id}
+                {...section}
+                isActive={scrollIndex === activeSection}
+              />
+            </>
+          )
+        })}
       </div>
     </Layout>
   )
