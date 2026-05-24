@@ -34,7 +34,7 @@ export default function PrivilegesSection({ isActive }: Props) {
             initial={{ opacity: 0, y: 30 }}
             animate={isActive ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.4, delay: i * 0.07 }}
-            className="group relative rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-4 flex flex-col gap-2 hover:border-opacity-60 hover:bg-white/10 transition-all cursor-pointer"
+            className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-4 flex flex-col gap-2 hover:bg-white/10 transition-all cursor-pointer"
             style={{ borderColor: `${p.color}33` }}
           >
             <div className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold" style={{ backgroundColor: `${p.color}22`, color: p.color }}>

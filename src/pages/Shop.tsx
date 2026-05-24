@@ -76,17 +76,10 @@ export default function Shop() {
                 <Button
                   size="sm"
                   variant="outline"
-                  className="text-xs h-8 px-4 border-white/20 text-white/70 transition-all"
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLButtonElement).style.backgroundColor = p.color
-                    ;(e.currentTarget as HTMLButtonElement).style.color = '#000'
-                    ;(e.currentTarget as HTMLButtonElement).style.borderColor = p.color
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLButtonElement).style.backgroundColor = ''
-                    ;(e.currentTarget as HTMLButtonElement).style.color = ''
-                    ;(e.currentTarget as HTMLButtonElement).style.borderColor = ''
-                  }}
+                  className="text-xs h-8 px-4 font-bold border-0 transition-all"
+                  style={{ backgroundColor: p.color, color: '#000' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.opacity = '0.8' }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = '1' }}
                   onClick={() => setSelected(p)}
                 >
                   Купить
