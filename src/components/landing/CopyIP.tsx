@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { Badge } from "@/components/ui/badge"
 import Icon from "@/components/ui/icon"
 
-const IP = "Sinima.aternos.me"
+const IP = "Sinima.aternos.me:35428"
 
 export default function CopyIP() {
   const [copied, setCopied] = useState(false)
