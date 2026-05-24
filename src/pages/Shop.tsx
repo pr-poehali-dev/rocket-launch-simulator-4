@@ -6,14 +6,14 @@ import { Squares } from "@/components/landing/squares-background"
 import Icon from "@/components/ui/icon"
 
 const privileges = [
-  { name: "Warden",   price: 29,  color: "#6ee7b7", desc: "Стартовый набор" },
-  { name: "SMP",      price: 49,  color: "#34d399", desc: "Выживание+" },
-  { name: "Explorer", price: 69,  color: "#10b981", desc: "Исследователь" },
-  { name: "Warrior",  price: 89,  color: "#059669", desc: "Воин сервера" },
-  { name: "Legenda",  price: 119, color: "#f59e0b", desc: "Легендарный статус" },
-  { name: "Lord",     price: 149, color: "#f97316", desc: "Повелитель" },
-  { name: "Spectre",  price: 189, color: "#a78bfa", desc: "Призрачная сила" },
-  { name: "Viper",    price: 249, color: "#ec4899", desc: "Элита сервера" },
+  { name: "Warden",   price: 29,  color: "#6ee7b7", desc: "Стартовый набор",    img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/45bc5bbe-e094-4445-bc17-0c5fd01a6f7f.jpg" },
+  { name: "SMP",      price: 49,  color: "#34d399", desc: "Выживание+",          img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/17ea7a7f-211a-4aa3-82a2-ad3852659138.jpg" },
+  { name: "Explorer", price: 69,  color: "#10b981", desc: "Исследователь",       img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/cdde5503-f3fc-4f67-b602-d05edd77c001.jpg" },
+  { name: "Warrior",  price: 89,  color: "#059669", desc: "Воин сервера",        img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/f659b02c-6840-421e-ba61-3ee3eb834cfd.jpg" },
+  { name: "Legenda",  price: 119, color: "#f59e0b", desc: "Легендарный статус",  img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/d92d8999-71f9-4b60-9cc7-16c8229c2369.jpg" },
+  { name: "Lord",     price: 149, color: "#f97316", desc: "Повелитель",           img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/8b4dfb50-d4bd-4f3f-a1bd-d356624f0037.jpg" },
+  { name: "Spectre",  price: 189, color: "#a78bfa", desc: "Призрачная сила",     img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/f24947cc-c3f3-4f87-ae29-16f2aea9f6be.jpg" },
+  { name: "Viper",    price: 249, color: "#ec4899", desc: "Элита сервера",        img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/c4eba9f0-01c9-43e9-9eaf-e8943224eac3.jpg" },
 ]
 
 const QR_URL = "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/bucket/b133a06d-0420-4e5d-aa76-9015bcd54942.jpg"
@@ -61,11 +61,8 @@ export default function Shop() {
               className="rounded-xl border bg-white/5 backdrop-blur-sm p-5 flex flex-col gap-3 hover:bg-white/10 transition-all"
               style={{ borderColor: `${p.color}44` }}
             >
-              <div
-                className="w-10 h-10 rounded-lg flex items-center justify-center text-base font-bold"
-                style={{ backgroundColor: `${p.color}22`, color: p.color }}
-              >
-                {p.name[0]}
+              <div className="w-14 h-14 rounded-xl overflow-hidden border" style={{ borderColor: `${p.color}44` }}>
+                <img src={p.img} alt={p.name} className="w-full h-full object-cover" />
               </div>
               <div>
                 <p className="font-bold text-white text-lg leading-tight">{p.name}</p>
