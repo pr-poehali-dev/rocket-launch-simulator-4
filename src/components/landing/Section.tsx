@@ -1,8 +1,10 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
+import { useNavigate } from "react-router-dom"
 import type { SectionProps } from "@/types"
 
 export default function Section({ id, title, subtitle, content, isActive, showButton, buttonText }: SectionProps) {
+  const navigate = useNavigate()
   return (
     <section id={id} className="relative h-screen w-full snap-start flex flex-col justify-center p-8 md:p-16 lg:p-24">
       {subtitle && (
@@ -44,7 +46,7 @@ export default function Section({ id, title, subtitle, content, isActive, showBu
             variant="outline"
             size="lg"
             className="text-green-400 bg-transparent border-green-400 hover:bg-green-400 hover:text-black transition-colors font-bold tracking-wide"
-            onClick={() => window.open('https://vk.ru/club239028200', '_blank')}
+            onClick={() => navigate('/shop')}
           >
             {buttonText}
           </Button>
