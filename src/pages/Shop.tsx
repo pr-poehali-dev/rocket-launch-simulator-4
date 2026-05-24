@@ -126,7 +126,8 @@ export default function Shop() {
 
               <div className="text-center text-sm text-neutral-400 leading-relaxed">
                 Отсканируй QR-код камерой телефона<br />
-                и переведи <span className="text-white font-semibold">{selected.price} ₽</span> через СБП (Озон Банк)
+                и переведи <span className="text-white font-semibold">{selected.price} ₽</span> через СБП (Озон Банк)<br />
+                <span className="text-yellow-400 font-semibold">⚠ Не забудьте указать свой ник в комментарии к оплате!</span>
               </div>
 
               <p className="text-xs text-neutral-600 text-center">
