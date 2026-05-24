@@ -4,7 +4,7 @@ export const sections = [
   {
     id: 'hero',
     subtitle: <CopyIP />,
-    title: "Прокачай свой игровой опыт.",
+    title: "Sinima — где каждый блок имеет значение.",
     showButton: true,
     buttonText: 'Перейти в магазин'
   },
