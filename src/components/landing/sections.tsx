@@ -1,9 +1,9 @@
-import { Badge } from "@/components/ui/badge"
+import CopyIP from "./CopyIP"
 
 export const sections = [
   {
     id: 'hero',
-    subtitle: <div className="flex items-center gap-3"><Badge variant="outline" className="text-green-400 border-green-400">Магазин открыт</Badge><Badge variant="outline" className="text-neutral-400 border-neutral-600 font-mono">Sinima.aternos.me</Badge></div>,
+    subtitle: <CopyIP />,
     title: "Прокачай свой игровой опыт.",
     showButton: true,
     buttonText: 'Перейти в магазин'
