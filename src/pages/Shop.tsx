@@ -1,4 +1,5 @@
-import { motion } from "framer-motion"
+import { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { useNavigate } from "react-router-dom"
 import { Squares } from "@/components/landing/squares-background"
@@ -17,12 +18,33 @@ const privileges = [
 
 const DA_BASE = "https://dalink.to/derviz"
 
+interface Selected {
+  name: string
+  price: number
+  oldPrice: number
+  color: string
+}
+
 export default function Shop() {
   const navigate = useNavigate()
+  const [selected, setSelected] = useState<Selected | null>(null)
+  const [nick, setNick] = useState("")
+  const [error, setError] = useState(false)
 
-  const handleBuy = (name: string, price: number) => {
-    const message = encodeURIComponent(`Привилегия ${name}`)
-    window.open(`${DA_BASE}?amount=${price}&message=${message}`, "_blank")
+  const handleOpen = (p: Selected) => {
+    setSelected(p)
+    setNick("")
+    setError(false)
+  }
+
+  const handlePay = () => {
+    if (!nick.trim()) {
+      setError(true)
+      return
+    }
+    const message = encodeURIComponent(`Привилегия ${selected!.name} | Ник: ${nick.trim()}`)
+    window.open(`${DA_BASE}?amount=${selected!.price}&message=${message}`, "_blank")
+    setSelected(null)
   }
 
   return (
@@ -77,7 +99,7 @@ export default function Shop() {
                   style={{ backgroundColor: p.color, color: '#000' }}
                   onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.opacity = '0.8' }}
                   onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = '1' }}
-                  onClick={() => handleBuy(p.name, p.price)}
+                  onClick={() => handleOpen(p)}
                 >
                   Купить
                 </Button>
@@ -95,6 +117,67 @@ export default function Shop() {
           После оплаты напиши в нашу группу — выдадим привилегию
         </motion.p>
       </div>
+
+      <AnimatePresence>
+        {selected && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelected(null)}
+          >
+            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
+            <motion.div
+              className="relative bg-[#111] border border-white/10 rounded-2xl p-6 max-w-sm w-full flex flex-col gap-5"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={e => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setSelected(null)}
+                className="absolute top-4 right-4 text-neutral-500 hover:text-white transition-colors"
+              >
+                <Icon name="X" size={18} />
+              </button>
+
+              <div>
+                <p className="text-neutral-400 text-sm">Покупка привилегии</p>
+                <p className="text-white text-2xl font-bold mt-0.5">{selected.name}</p>
+                <div className="flex items-center gap-2 mt-1">
+                  <span className="text-sm text-neutral-500 line-through">{selected.oldPrice} ₽</span>
+                  <span className="text-xl font-bold" style={{ color: selected.color }}>{selected.price} ₽</span>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-sm text-neutral-400">Твой ник в Minecraft</label>
+                <input
+                  type="text"
+                  value={nick}
+                  onChange={e => { setNick(e.target.value); setError(false) }}
+                  onKeyDown={e => e.key === "Enter" && handlePay()}
+                  placeholder="Введи ник..."
+                  className={`w-full bg-white/5 border rounded-lg px-4 py-2.5 text-white placeholder-neutral-600 outline-none transition-colors ${
+                    error ? "border-red-500" : "border-white/10 focus:border-white/30"
+                  }`}
+                  autoFocus
+                />
+                {error && <p className="text-xs text-red-400">Укажи ник, чтобы мы знали кому выдать привилегию</p>}
+              </div>
+
+              <Button
+                className="w-full font-bold h-11 border-0"
+                style={{ backgroundColor: selected.color, color: '#000' }}
+                onClick={handlePay}
+              >
+                Перейти к оплате
+              </Button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
