@@ -1,5 +1,4 @@
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { useNavigate } from "react-router-dom"
 import { Squares } from "@/components/landing/squares-background"
@@ -16,18 +15,15 @@ const privileges = [
   { name: "Viper",    price: 449, oldPrice: 799, color: "#ec4899", desc: "Элита сервера",        img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/c4eba9f0-01c9-43e9-9eaf-e8943224eac3.jpg" },
 ]
 
-const QR_URL = "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/bucket/b133a06d-0420-4e5d-aa76-9015bcd54942.jpg"
-
-interface Selected {
-  name: string
-  price: number
-  oldPrice: number
-  color: string
-}
+const DA_BASE = "https://dalink.to/derviz"
 
 export default function Shop() {
   const navigate = useNavigate()
-  const [selected, setSelected] = useState<Selected | null>(null)
+
+  const handleBuy = (name: string, price: number) => {
+    const message = encodeURIComponent(`Привилегия ${name}`)
+    window.open(`${DA_BASE}?amount=${price}&message=${message}`, "_blank")
+  }
 
   return (
     <div className="min-h-screen bg-black relative overflow-auto">
@@ -81,7 +77,7 @@ export default function Shop() {
                   style={{ backgroundColor: p.color, color: '#000' }}
                   onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.opacity = '0.8' }}
                   onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.opacity = '1' }}
-                  onClick={() => setSelected(p)}
+                  onClick={() => handleBuy(p.name, p.price)}
                 >
                   Купить
                 </Button>
@@ -89,61 +85,16 @@ export default function Shop() {
             </motion.div>
           ))}
         </div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6 }}
+          className="text-center text-xs text-neutral-600 mt-8"
+        >
+          После оплаты напиши в нашу группу — выдадим привилегию
+        </motion.p>
       </div>
-
-      {/* Модальное окно с QR */}
-      <AnimatePresence>
-        {selected && (
-          <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelected(null)}
-          >
-            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
-            <motion.div
-              className="relative bg-[#111] border border-white/10 rounded-2xl p-6 max-w-sm w-full flex flex-col items-center gap-4"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              onClick={e => e.stopPropagation()}
-            >
-              <button
-                onClick={() => setSelected(null)}
-                className="absolute top-4 right-4 text-neutral-500 hover:text-white transition-colors"
-              >
-                <Icon name="X" size={18} />
-              </button>
-
-              <div className="text-center">
-                <p className="text-neutral-400 text-sm">Оплата привилегии</p>
-                <p className="text-white text-2xl font-bold mt-1">{selected.name}</p>
-                <div className="flex items-center justify-center gap-2 mt-1">
-                  <span className="text-sm text-neutral-500 line-through">{selected.oldPrice} ₽</span>
-                  <span className="text-xl font-bold" style={{ color: selected.color }}>{selected.price} ₽</span>
-                </div>
-              </div>
-
-              <img
-                src={QR_URL}
-                alt="QR-код для оплаты"
-                className="w-52 h-52 rounded-xl object-cover"
-              />
-
-              <div className="text-center text-sm text-neutral-400 leading-relaxed">
-                Отсканируй QR-код камерой телефона<br />
-                и переведи <span className="text-white font-semibold">{selected.price} ₽</span> через СБП (Озон Банк)<br />
-                <span className="text-yellow-400 font-semibold">⚠ Не забудьте указать свой ник в комментарии к оплате!</span>
-              </div>
-
-              <p className="text-xs text-neutral-400 text-center">
-                После оплаты напиши в нашу группу — выдадим привилегию
-              </p>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   )
 }
