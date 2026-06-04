@@ -130,12 +130,8 @@ export default function Shop() {
                 <span className="text-yellow-400 font-semibold">⚠ Не забудьте указать свой ник в комментарии к оплате!</span>
               </div>
 
-              <p className="text-xs text-neutral-600 text-center">
-                После оплаты напиши в{" "}
-                <a href="https://vk.ru/club239028200" target="_blank" rel="noreferrer" className="text-neutral-400 hover:text-white underline transition-colors">
-                  нашу группу ВК
-                </a>
-                {" "}— выдадим привилегию
+              <p className="text-xs text-neutral-400 text-center">
+                После оплаты напиши в нашу группу — выдадим привилегию
               </p>
             </motion.div>
           </motion.div>
