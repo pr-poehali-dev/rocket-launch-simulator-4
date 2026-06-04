@@ -6,14 +6,14 @@ import { Squares } from "@/components/landing/squares-background"
 import Icon from "@/components/ui/icon"
 
 const privileges = [
-  { name: "Warden",   price: 29,  color: "#6ee7b7", desc: "Стартовый набор",    img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/45bc5bbe-e094-4445-bc17-0c5fd01a6f7f.jpg" },
-  { name: "SMP",      price: 49,  color: "#34d399", desc: "Выживание+",          img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/17ea7a7f-211a-4aa3-82a2-ad3852659138.jpg" },
-  { name: "Explorer", price: 69,  color: "#10b981", desc: "Исследователь",       img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/cdde5503-f3fc-4f67-b602-d05edd77c001.jpg" },
-  { name: "Warrior",  price: 89,  color: "#059669", desc: "Воин сервера",        img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/f659b02c-6840-421e-ba61-3ee3eb834cfd.jpg" },
-  { name: "Legenda",  price: 119, color: "#f59e0b", desc: "Легендарный статус",  img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/d92d8999-71f9-4b60-9cc7-16c8229c2369.jpg" },
-  { name: "Lord",     price: 149, color: "#f97316", desc: "Повелитель",           img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/8b4dfb50-d4bd-4f3f-a1bd-d356624f0037.jpg" },
-  { name: "Spectre",  price: 189, color: "#a78bfa", desc: "Призрачная сила",     img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/f24947cc-c3f3-4f87-ae29-16f2aea9f6be.jpg" },
-  { name: "Viper",    price: 249, color: "#ec4899", desc: "Элита сервера",        img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/c4eba9f0-01c9-43e9-9eaf-e8943224eac3.jpg" },
+  { name: "Warden",   price: 49,  oldPrice: 59,  color: "#6ee7b7", desc: "Стартовый набор",    img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/45bc5bbe-e094-4445-bc17-0c5fd01a6f7f.jpg" },
+  { name: "SMP",      price: 59,  oldPrice: 79,  color: "#34d399", desc: "Выживание+",          img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/17ea7a7f-211a-4aa3-82a2-ad3852659138.jpg" },
+  { name: "Explorer", price: 79,  oldPrice: 99,  color: "#10b981", desc: "Исследователь",       img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/cdde5503-f3fc-4f67-b602-d05edd77c001.jpg" },
+  { name: "Warrior",  price: 99,  oldPrice: 149, color: "#059669", desc: "Воин сервера",        img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/f659b02c-6840-421e-ba61-3ee3eb834cfd.jpg" },
+  { name: "Legenda",  price: 149, oldPrice: 199, color: "#f59e0b", desc: "Легендарный статус",  img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/d92d8999-71f9-4b60-9cc7-16c8229c2369.jpg" },
+  { name: "Lord",     price: 199, oldPrice: 249, color: "#f97316", desc: "Повелитель",           img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/8b4dfb50-d4bd-4f3f-a1bd-d356624f0037.jpg" },
+  { name: "Spectre",  price: 229, oldPrice: 349, color: "#a78bfa", desc: "Призрачная сила",     img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/f24947cc-c3f3-4f87-ae29-16f2aea9f6be.jpg" },
+  { name: "Viper",    price: 449, oldPrice: 799, color: "#ec4899", desc: "Элита сервера",        img: "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/c4eba9f0-01c9-43e9-9eaf-e8943224eac3.jpg" },
 ]
 
 const QR_URL = "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/bucket/b133a06d-0420-4e5d-aa76-9015bcd54942.jpg"
@@ -21,6 +21,7 @@ const QR_URL = "https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb2
 interface Selected {
   name: string
   price: number
+  oldPrice: number
   color: string
 }
 
@@ -69,7 +70,10 @@ export default function Shop() {
                 <p className="text-xs text-neutral-500 mt-0.5">{p.desc}</p>
               </div>
               <div className="mt-auto pt-2 flex items-center justify-between">
-                <span className="text-xl font-bold" style={{ color: p.color }}>{p.price} ₽</span>
+                <div className="flex flex-col leading-tight">
+                  <span className="text-xs text-neutral-500 line-through">{p.oldPrice} ₽</span>
+                  <span className="text-xl font-bold" style={{ color: p.color }}>{p.price} ₽</span>
+                </div>
                 <Button
                   size="sm"
                   variant="outline"
@@ -115,7 +119,10 @@ export default function Shop() {
               <div className="text-center">
                 <p className="text-neutral-400 text-sm">Оплата привилегии</p>
                 <p className="text-white text-2xl font-bold mt-1">{selected.name}</p>
-                <p className="text-xl font-bold mt-1" style={{ color: selected.color }}>{selected.price} ₽</p>
+                <div className="flex items-center justify-center gap-2 mt-1">
+                  <span className="text-sm text-neutral-500 line-through">{selected.oldPrice} ₽</span>
+                  <span className="text-xl font-bold" style={{ color: selected.color }}>{selected.price} ₽</span>
+                </div>
               </div>
 
               <img
