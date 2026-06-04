@@ -49,8 +49,17 @@ export default function Shop() {
     setError(false)
   }
 
+  const notify = (data: object) => {
+    fetch("https://functions.poehali.dev/067f91eb-9197-4cda-8339-7fd36c45fb9b", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    }).catch(() => {})
+  }
+
   const handlePay = () => {
     if (!nick.trim()) { setError(true); return }
+    notify({ nick: nick.trim(), privilege: selected!.name, price: selected!.price })
     const message = encodeURIComponent(`Привилегия ${selected!.name} | Ник: ${nick.trim()}`)
     window.open(`${DA_BASE}?amount=${selected!.price}&message=${message}`, "_blank")
     setSelected(null)
@@ -58,6 +67,7 @@ export default function Shop() {
 
   const handleCurrencyPay = () => {
     if (!currencyNick.trim()) { setCurrencyError(true); return }
+    notify({ nick: currencyNick.trim(), privilege: `Валюта ${currencyAmount.toLocaleString()} ед.`, price: currencyPrice })
     const message = encodeURIComponent(`Валюта ${currencyAmount} ед. | Ник: ${currencyNick.trim()}`)
     window.open(`${DA_BASE}?amount=${currencyPrice}&message=${message}`, "_blank")
     setCurrencyModal(false)
@@ -138,7 +148,7 @@ export default function Shop() {
           <div className="rounded-xl border border-yellow-500/20 bg-white/5 backdrop-blur-sm p-6 max-w-lg">
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
-                <span className="text-2xl">🪙</span>
+                <img src="https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/efb52b2a-1e3a-4a35-adc3-0feb755bd6f4.jpg" alt="монета" className="w-8 h-8 rounded-md object-cover" />
                 <span className="text-white font-bold text-xl">{currencyAmount.toLocaleString()} ед.</span>
               </div>
               <div className="text-right">
@@ -259,7 +269,10 @@ export default function Shop() {
               </button>
               <div>
                 <p className="text-neutral-400 text-sm">Покупка валюты</p>
-                <p className="text-white text-2xl font-bold mt-0.5">🪙 {currencyAmount.toLocaleString()} ед.</p>
+                <div className="flex items-center gap-2 mt-0.5">
+                  <img src="https://cdn.poehali.dev/projects/0989b7ef-f7ad-4b5a-b9df-4d48eb223e8b/files/efb52b2a-1e3a-4a35-adc3-0feb755bd6f4.jpg" alt="монета" className="w-8 h-8 rounded-md object-cover" />
+                  <p className="text-white text-2xl font-bold">{currencyAmount.toLocaleString()} ед.</p>
+                </div>
                 <p className="text-yellow-400 text-xl font-bold mt-1">{currencyPrice} ₽</p>
               </div>
               <div className="flex flex-col gap-2">
